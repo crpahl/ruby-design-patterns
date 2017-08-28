@@ -1,9 +1,25 @@
 class Report
-  atrr_accessor :title, :text
+  attr_accessor :title, :text, :report
+
   def initialize(title, text)
     @title = title
     @text = text
+    @report = ''
   end
+
+  public
+
+  def as_string
+    puts self.output_report
+  end
+
+  def as_file(file_location)
+    File.open(file_location, 'w') do |file|
+      file.puts self.output_report
+    end
+  end
+
+  protected
 
   def output_report
     self.output_start
@@ -43,4 +59,6 @@ class Report
   def output_end
     raise NotImplementedError, 'Called abstract method: output_end'
   end
+
+
 end
